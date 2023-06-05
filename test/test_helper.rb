@@ -3,6 +3,9 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require "webmock/minitest"
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -11,5 +14,13 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def stub_get_request(path, response:)
+    stub_request(:get, "https://api.openweathermap.org/#{path}").
+      with(headers: {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+        "User-Agent": "Faraday v2.7.5",
+        "X-Api-Key": ENV["OPEN_WEATHER_API_KEY"]
+      }).to_return(response)
+  end
 end
