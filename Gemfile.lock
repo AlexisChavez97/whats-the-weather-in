@@ -116,6 +116,7 @@ GEM
     importmap-rails (1.1.6)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    interactor (3.1.2)
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   dotenv-rails
   faraday
   importmap-rails
+  interactor
   jbuilder
   pg (~> 1.1)
   pry-byebug

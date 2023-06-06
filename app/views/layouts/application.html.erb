@@ -11,11 +11,19 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="h-full">
+  <body class="h-screen bg-gray-100">
     <header>
     </header>
-    <main>
-      <%= yield %>
-    </main>
+    <div class="flex h-screen">
+      <aside class="w-80">
+        <%= render "shared/navbar" %>
+      </aside>
+      <main class="flex-1 flex justify-center items-center">
+        <div class="flex-1 h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <%= turbo_frame_tag "modal" %>
+          <%= yield %>
+        </div>    
+      </main>
+    </div>
   </body>
 </html>
