@@ -27,6 +27,7 @@ class CreateWeatherReport
     def weather_report_attributes
       {
         city: geolocation.name,
+        state: geolocation.state,
         condition: weather_data.weather.first.description,
         temperature: weather_data.main.temp,
         latitude: geolocation.lat,

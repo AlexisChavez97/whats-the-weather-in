@@ -15,9 +15,9 @@ module OpenWeather
 
       def handle_response(response)
         if response.body.empty?
-          raise StandardError.new("Not found: OpenWeather API returned an empty response")
+          raise StandardError.new(I18n.t("open_weather.errors.not_found"))
         elsif response.status == 400
-          raise StandardError.new("OpenWeather API returned a bad request")
+          raise StandardError.new(I18n.t("open_weather.errors.bad_request"))
         else
           response
         end

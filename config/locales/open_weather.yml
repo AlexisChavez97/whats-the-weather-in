@@ -1,0 +1,5 @@
+en:
+  open_weather:
+    errors:
+      not_found: We weren't able to find that city :-(
+      bad_request: Open Weather API returned a bad request
