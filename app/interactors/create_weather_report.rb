@@ -12,7 +12,7 @@ class CreateWeatherReport
       context.fail!(message: weather_report.errors.full_messages)
     end
   rescue StandardError => e
-    context.fail!(message: e.m) if weather_data.bad_request?
+    context.fail!(message: e.message)
   end
 
   private
