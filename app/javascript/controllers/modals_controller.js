@@ -12,4 +12,10 @@ export default class extends Controller {
     modal.removeAttribute("src");
     modal.removeAttribute("complete");
   }
+
+  submitEnd(e) {
+    if (e.detail.success) {
+      this.close(e)
+    }
+  }
 }

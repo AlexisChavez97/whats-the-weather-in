@@ -14,21 +14,13 @@ module OpenWeather
       end
 
       def handle_response(response)
-        case response.status
-        when 400
-          raise StandardError, response.body["message"]
-        when 401
-          raise StandardError, response.body["message"]
-        when 402
-          raise StandardError, response.body["message"]
-        when 403
-          raise StandardError, "Forbidden"
-        when 404
-          raise StandardError, response.body["message"]
-        when 500
-          raise StandardError, "Internal Server Error"
+        if response.body.empty?
+          raise StandardError.new("Not found: OpenWeather API returned an empty response")
+        elsif response.status == 400
+          raise StandardError.new("OpenWeather API returned a bad request")
+        else
+          response
         end
-        response
       end
   end
 end

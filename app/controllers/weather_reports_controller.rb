@@ -18,6 +18,8 @@ class WeatherReportsController < ApplicationController
       user: current_user
     )
     if result.success?
+      @weather_report = result.weather_report
+
       respond_to do |format|
         format.html { redirect_to weather_reports_path }
         format.turbo_stream
