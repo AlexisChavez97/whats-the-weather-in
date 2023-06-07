@@ -5,7 +5,7 @@
 class WeatherReport < ApplicationRecord
   belongs_to :user
 
-  validates_presence_of :city, :condition, :temperature, :latitude, :longitude, :icon
+  validates_presence_of :city, :state, :condition, :temperature, :latitude, :longitude, :icon
 
   scope :recent, -> { order(created_at: :desc).limit(11) }
 

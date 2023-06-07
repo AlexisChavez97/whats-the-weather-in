@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_181217) do
 
   create_table "weather_reports", force: :cascade do |t|
     t.string "city"
+    t.string "state"
     t.string "condition"
     t.string "temperature"
     t.string "latitude"

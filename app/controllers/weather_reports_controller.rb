@@ -25,7 +25,7 @@ class WeatherReportsController < ApplicationController
         format.turbo_stream
       end
     else
-      render :new, status: :unprocessable_entity
+      render turbo_stream: turbo_stream.update("errors", partial: "shared/error_messages", locals: { errors: result.message }), status: :unprocessable_entity
     end
   end
 
