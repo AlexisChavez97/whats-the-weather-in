@@ -8,7 +8,7 @@
 
 #### Setup ruby
 - Install your preferred Ruby version manager
-- [rvm](https://rvm.io/rvm/install), or [rbenv](https://github.com/rbenv/rbenv#installation)
+- [rvm](https://rvm.io/rvm/install) or [rbenv](https://github.com/rbenv/rbenv#installation)
 - Install Ruby via RBENV
 - `$ rbenv install 3.2.1`
 
