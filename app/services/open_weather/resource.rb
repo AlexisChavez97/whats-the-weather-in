@@ -2,9 +2,9 @@
 
 module OpenWeather
   class Resource
-    attr_reader :client
-
     CACHE_POLICY = lambda { 10.minutes.ago }
+
+    attr_reader :client
 
     def initialize(client)
       @client = client
@@ -18,13 +18,10 @@ module OpenWeather
       end
 
       def handle_response(response)
-        if response.body.empty?
-          raise StandardError.new(I18n.t("open_weather.errors.not_found"))
-        elsif response.status == 400
-          raise StandardError.new(I18n.t("open_weather.errors.bad_request"))
-        else
-          response
-        end
+        raise StandardError.new(I18n.t("open_weather.errors.not_found")) if response.body.empty?
+        raise StandardError.new(I18n.t("open_weather.errors.bad_request")) if response.status == 400
+
+        response
       end
 
       def request_path(url, query)

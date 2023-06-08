@@ -16,14 +16,6 @@ class CreateWeatherReport
   end
 
   private
-    def geolocation
-      @geolocation ||= context.client.get(resource: "geolocation", q: context.params[:city])
-    end
-
-    def weather_data
-      @weather_data ||= context.client.get(resource: "current_weather", lat: geolocation.lat, lon: geolocation.lon)
-    end
-
     def weather_report_attributes
       {
         city: geolocation.name,
@@ -34,5 +26,21 @@ class CreateWeatherReport
         longitude: geolocation.lon,
         icon: weather_data.weather.first.icon
       }
+    end
+
+    def geolocation
+      @geolocation ||= fetch_geolocation
+    end
+
+    def weather_data
+      @weather_data ||= fetch_weather_data
+    end
+
+    def fetch_geolocation
+      @geolocation ||= context.client.get(resource: "geolocation", q: context.params[:city])
+    end
+
+    def fetch_weather_data
+      @weather_data ||= context.client.get(resource: "current_weather", lat: geolocation.lat, lon: geolocation.lon)
     end
 end
