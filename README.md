@@ -7,14 +7,14 @@
 - Install gem dependencies via bundler
 
 #### Setup ruby
-# Install your preferred Ruby version manager
-# [rvm](https://rvm.io/rvm/install), or [rbenv](https://github.com/rbenv/rbenv#installation)
-# Install Ruby via RBENV
-# $ rbenv install 3.2.1
+- Install your preferred Ruby version manager
+- [rvm](https://rvm.io/rvm/install), or [rbenv](https://github.com/rbenv/rbenv#installation)
+- Install Ruby via RBENV
+- `$ rbenv install 3.2.1`
 
 #### Setup rails
-# $ gem install rails
-# $ bundle install
+- `$ gem install rails`
+- `$ bundle install`
 
 
 ### DB
