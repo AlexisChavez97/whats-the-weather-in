@@ -6,7 +6,7 @@ module OpenWeather
       include ResponseToOpenStruct
 
       def get(params)
-        to_struct(get_request("data/2.5/weather?units=metric", params).body)
+        to_struct(get_request("data/2.5/weather", params.merge(units: "metric")).body)
       end
     end
   end
