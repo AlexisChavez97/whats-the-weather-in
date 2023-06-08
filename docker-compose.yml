@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  postgres:
+    image: 'postgres:latest'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+  rails:
+    build: ./ 
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/docker/app
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
