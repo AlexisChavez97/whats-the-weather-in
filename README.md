@@ -1,24 +1,43 @@
-# README
+# What's the weather
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+### Setup Local Development
+- Setup the correct ruby environment
+- Install gem dependencies via bundler
 
-* Ruby version
+#### Setup ruby
+# Install your preferred Ruby version manager
+# [rvm](https://rvm.io/rvm/install), or [rbenv](https://github.com/rbenv/rbenv#installation)
+# Install Ruby via RBENV
+# $ rbenv install 3.2.1
 
-* System dependencies
+#### Setup rails
+# $ gem install rails
+# $ bundle install
 
-* Configuration
 
-* Database creation
+### DB
+Create the db `$ bin/rails db:create`
+To migrate the db just run `$ bin/rails db:migrate`
 
-* Database initialization
+## Run
+Now that your environment is setup, you are ready to start the application.
 
-* How to run the test suite
+```
+$ bin/dev
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+This script will launch the puma server at `http://localhost:3000`
 
-* Deployment instructions
+## Docker
+If you wish to run the application through docker make sure you have it installed
+- Open your etc/hosts file and add this line: `127.0.0.1 postgres`
+- Run `$ docker-compose up`
 
-* ...
+This script will download the required images to run the application
+
+### DB
+To migrate the db you can run `$ docker-compose run rails rails db:migrate`
+
+You should be all set now
