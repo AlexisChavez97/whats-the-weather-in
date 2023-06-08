@@ -40,3 +40,8 @@ This script will download the required images to run the application and will la
 - To migrate the db you can run `$ docker-compose run rails rails db:migrate`
 
 - You should be all set now
+
+
+## Cool features
+- The forms found in the app use turbo and hotwire to do live updates without refreshing the whole page
+- The open weather API client has a caching mechanism to prevent unnecessary calls and have a faster respond time
