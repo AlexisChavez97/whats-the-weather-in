@@ -18,8 +18,8 @@
 
 
 ### DB
-Create the db `$ bin/rails db:create`
-To migrate the db just run `$ bin/rails db:migrate`
+- Create the db `$ bin/rails db:create`
+- To migrate the db just run `$ bin/rails db:migrate`
 
 ## Run
 Now that your environment is setup, you are ready to start the application.
@@ -37,6 +37,6 @@ If you wish to run the application through docker make sure you have it installe
 This script will download the required images to run the application
 
 ### DB
-To migrate the db you can run `$ docker-compose run rails rails db:migrate`
+- To migrate the db you can run `$ docker-compose run rails rails db:migrate`
 
-You should be all set now
+- You should be all set now
