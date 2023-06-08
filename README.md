@@ -34,7 +34,7 @@ If you wish to run the application through docker make sure you have it installe
 - Open your etc/hosts file and add this line: `127.0.0.1 postgres`
 - Run `$ docker-compose up`
 
-This script will download the required images to run the application
+This script will download the required images to run the application and will launch the puma server at `http://localhost:3000`
 
 ### DB
 - To migrate the db you can run `$ docker-compose run rails rails db:migrate`
