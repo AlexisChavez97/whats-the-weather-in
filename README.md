@@ -24,9 +24,8 @@ To migrate the db just run `$ bin/rails db:migrate`
 ## Run
 Now that your environment is setup, you are ready to start the application.
 
-```
-$ bin/dev
-```
+`$ bin/dev`
+
 
 This script will launch the puma server at `http://localhost:3000`
 
