@@ -21,7 +21,7 @@ class CreateCurrentWeather
      def weather_report_attributes
        {
          city: context.geolocation.name,
-         state: context.geolocation.state,
+         state: (context.geolocation.state || context.geolocation.country),
          condition: context.weather_data.current.weather.first.description,
          temperature: context.weather_data.current.temp,
          latitude: context.geolocation.lat,
