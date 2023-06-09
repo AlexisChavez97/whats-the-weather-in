@@ -3,6 +3,8 @@
 class WeatherReport < ApplicationRecord
   belongs_to :user
 
+  before_save :update_last_refresh
+
   has_many :daily_weather_forecasts, dependent: :destroy
 
   validates_presence_of :city, :state, :condition, :temperature, :latitude, :longitude, :icon
@@ -17,21 +19,13 @@ class WeatherReport < ApplicationRecord
     "#{temperature}°"
   end
 
-  def updated_or_created
-    if updated_at != created_at
-      Time.current - updated_at
-    else
-      Time.current - created_at
-    end
-  end
-
   # rubocop:disable Performance/OpenStruct
   def geolocation
     OpenStruct.new(lat: latitude, lon: longitude)
   end
 
   def time_ago
-    time_difference = updated_or_created
+    time_difference = Time.current - last_refresh
     seconds = time_difference.to_i
 
     case
@@ -49,4 +43,9 @@ class WeatherReport < ApplicationRecord
       "#{seconds / 1.year} years ago"
     end
   end
+
+  private
+    def update_last_refresh
+      self.last_refresh = Time.current
+    end
 end
