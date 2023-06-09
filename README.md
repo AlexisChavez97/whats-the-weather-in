@@ -20,6 +20,11 @@
 
 You'll need to add an API key for the OpenWeather API as an environment variable
 
+```
+# .env
+OPEN_WEATHER_API_KEY=YOURAPIKEY
+```
+
 
 ### DB
 - Create the db `$ bin/rails db:create`
