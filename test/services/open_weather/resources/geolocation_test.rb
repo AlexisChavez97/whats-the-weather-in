@@ -8,7 +8,7 @@ class OpenWeather::GeolocationTest < ActiveSupport::TestCase
   end
 
   def test_gets_and_sets_attributes
-    stub_get_request("geo/1.0/direct?q=London", response: {
+    stub_get_request("#{geolocation_path}?q=London", response: {
       status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_london.json"))
     })
     subject = @client.get(resource: "geolocation", q: "London")

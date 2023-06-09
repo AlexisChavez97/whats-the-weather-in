@@ -11,6 +11,10 @@ class WeatherReportsController < ApplicationController
     @weather_report = WeatherReport.new
   end
 
+  def show
+    @weather_report = WeatherReport.find(params[:id])
+  end
+
   def create
     result = ::CreateWeatherReport.call(
       client: OpenWeather::Client.new,

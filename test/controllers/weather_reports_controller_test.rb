@@ -10,10 +10,11 @@ class WeatherReportsControllerTest < ActionDispatch::IntegrationTest
     @weather_report = weather_reports(:valid)
     sign_in @user
 
-    stub_get_request("geo/1.0/direct?q=London", response: {
+    stub_get_request("#{geolocation_path}?q=London", response: {
       status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_london.json"))
     })
-    stub_get_request("data/2.5/weather?lat=51.5073219&lon=-0.1276474&units=metric", response: {
+
+    stub_get_request("#{one_call_path}&lat=51.5073219&lon=-0.1276474", response: {
       status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "current_weather_london.json"))
     })
   end
@@ -25,6 +26,11 @@ class WeatherReportsControllerTest < ActionDispatch::IntegrationTest
 
   def test_should_get_new
     get new_weather_report_path
+    assert_response :success
+  end
+
+  def test_should_show_weather_report
+    get new_weather_report_path(@weather_report)
     assert_response :success
   end
 

@@ -2,11 +2,11 @@
 
 module OpenWeather
   module Resources
-    class CurrentWeather < Resource
+    class OneCall < Resource
       include ResponseToOpenStruct
 
       def get(params)
-        to_struct(get_request("data/2.5/weather", params.merge(units: "metric")).body)
+        to_struct(get_request("data/3.0/onecall", params.merge(units: "metric", exclude: "minutely, hourly")).body)
       end
     end
   end
