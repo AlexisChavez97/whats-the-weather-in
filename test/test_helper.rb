@@ -23,4 +23,12 @@ class ActiveSupport::TestCase
         "X-Api-Key": ENV["OPEN_WEATHER_API_KEY"]
       }).to_return(response)
   end
+
+  def geolocation_path
+    "geo/1.0/direct"
+  end
+
+  def one_call_path
+    "data/3.0/onecall?exclude=minutely, hourly&units=metric"
+  end
 end

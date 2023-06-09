@@ -8,18 +8,18 @@ class OpenWeather::ClientTest < ActiveSupport::TestCase
   end
 
   def test_gets_geolocation_resource
-    stub_get_request("geo/1.0/direct?q=London", response: {
+    stub_get_request("#{geolocation_path}?q=London", response: {
       status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_london.json"))
     })
 
     assert_equal OpenStruct, @subject.get(resource: "geolocation", q: "London").class
   end
 
-  def test_gets_current_weather_resource
-    stub_get_request("data/2.5/weather?lat=51.5073219&lon=-0.1276474&units=metric", response: {
+  def test_gets_one_call_resource
+    stub_get_request("#{one_call_path}&lat=51.5073219&lon=-0.1276474", response: {
       status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "current_weather_london.json"))
     })
 
-    assert_equal OpenStruct, @subject.get(resource: "current_weather", lat: 51.5073219, lon: -0.1276474).class
+    assert_equal OpenStruct, @subject.get(resource: "one_call", lat: 51.5073219, lon: -0.1276474).class
   end
 end

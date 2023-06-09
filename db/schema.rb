@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_205627) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_204853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_205627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url"], name: "index_api_requests_on_url", unique: true
+  end
+
+  create_table "daily_weather_forecasts", force: :cascade do |t|
+    t.date "date"
+    t.string "summary"
+    t.string "high"
+    t.string "low"
+    t.string "icon"
+    t.bigint "weather_forecast_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weather_forecast_id"], name: "index_daily_weather_forecasts_on_weather_forecast_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,6 +44,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_205627) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weather_forecasts", force: :cascade do |t|
+    t.bigint "weather_report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weather_report_id"], name: "index_weather_forecasts_on_weather_report_id"
   end
 
   create_table "weather_reports", force: :cascade do |t|
@@ -49,5 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_205627) do
     t.index ["user_id"], name: "index_weather_reports_on_user_id"
   end
 
+  add_foreign_key "daily_weather_forecasts", "weather_forecasts"
+  add_foreign_key "weather_forecasts", "weather_reports"
   add_foreign_key "weather_reports", "users"
 end

@@ -12,7 +12,7 @@ class ApiRequestTest < ActiveSupport::TestCase
   end
 
   def test_it_should_save_subject_with_url
-    subject = ApiRequest.new(url: "geo/1.0/direct?q=London")
+    subject = ApiRequest.new(url: "#{geolocation_path}?q=London")
 
     assert_difference "ApiRequest.count", 1 do
       subject.save
@@ -20,8 +20,8 @@ class ApiRequestTest < ActiveSupport::TestCase
   end
 
   def test_it_should_not_save_subject_with_same_url
-    subject_1 = ApiRequest.new(url: "geo/1.0/direct?q=London")
-    subject_2 = ApiRequest.new(url: "geo/1.0/direct?q=London")
+    subject_1 = ApiRequest.new(url: "#{geolocation_path}?q=London")
+    subject_2 = ApiRequest.new(url: "#{geolocation_path}?q=London")
 
     assert_difference "ApiRequest.count", 1 do
       subject_1.save
@@ -30,8 +30,8 @@ class ApiRequestTest < ActiveSupport::TestCase
   end
 
   def test_it_should_save_subject_with_different_url
-    subject_1 = ApiRequest.new(url: "geo/1.0/direct?q=London")
-    subject_2 = ApiRequest.new(url: "geo/1.0/direct?q=Manchester")
+    subject_1 = ApiRequest.new(url: "#{geolocation_path}?q=London")
+    subject_2 = ApiRequest.new(url: "#{geolocation_path}?q=Manchester")
 
     assert_difference "ApiRequest.count", 2 do
       subject_1.save

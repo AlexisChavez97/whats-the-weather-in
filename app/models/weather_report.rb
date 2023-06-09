@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
-# frozen_string_literal_true
-
 class WeatherReport < ApplicationRecord
   belongs_to :user
+
+  has_one :weather_forecast, dependent: :destroy
 
   validates_presence_of :city, :state, :condition, :temperature, :latitude, :longitude, :icon
 
   scope :recent, -> { order(created_at: :desc).limit(11) }
+
+  def forecast
+    weather_forecast.daily_weather_forecasts
+  end
 
   def temperature_to_degrees
     "#{temperature}°"
