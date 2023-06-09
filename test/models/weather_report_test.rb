@@ -16,6 +16,7 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.latitude = 34.0522
     @subject.longitude = -118.2437
     @subject.icon = "01d"
+    @subject.last_refresh = Time.current
 
     assert @subject.save
   end
@@ -27,6 +28,7 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.latitude = 34.0522
     @subject.longitude = -118.2437
     @subject.icon = "01d"
+    @subject.last_refresh = Time.current
 
     assert_not @subject.save
   end
@@ -38,6 +40,7 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.latitude = 34.0522
     @subject.longitude = -118.2437
     @subject.icon = "01d"
+    @subject.last_refresh = Time.current
 
     assert_not @subject.save
   end
@@ -60,6 +63,7 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.temperature = 70
     @subject.longitude = -118.2437
     @subject.icon = "01d"
+    @subject.last_refresh = Time.current
 
     assert_not @subject.save
   end
@@ -71,6 +75,7 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.temperature = 70
     @subject.latitude = 34.0522
     @subject.icon = "01d"
+    @subject.last_refresh = Time.current
 
     assert_not @subject.save
   end
@@ -81,7 +86,26 @@ class WeatherReportTest < ActiveSupport::TestCase
     @subject.condition = "Sunny"
     @subject.temperature = 70
     @subject.latitude = 34.0522
+    @subject.last_refresh = Time.current
 
     assert_not @subject.save
+  end
+
+  test "should not save weather report without last_refresh" do
+    @subject.city = "Los Angeles"
+    @subject.state = "California"
+    @subject.condition = "Sunny"
+    @subject.temperature = 70
+    @subject.latitude = 34.0522
+
+    assert_not @subject.save
+  end
+
+  test "should update last refresh correctly" do
+    subject = weather_reports(:valid)
+    current_last_refresh = subject.last_refresh
+    subject.update(city: "New York")
+
+    assert_not_equal current_last_refresh, subject.reload.last_refresh
   end
 end

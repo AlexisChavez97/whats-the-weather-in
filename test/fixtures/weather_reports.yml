@@ -8,5 +8,6 @@ valid:
   latitude: 51.5073219
   longitude: -0.1276474
   icon: d10
+  last_refresh: <%= Time.current %>
   id: 1
   user_id: 1
