@@ -71,41 +71,21 @@ class CreateWeatherReportTest < ActionDispatch::IntegrationTest
     assert_redirected_to weather_reports_path
   end
 
-  def test_it_creates_a_new_weather_forecast
-    assert_difference "WeatherForecast.count", 1 do
+  def test_it_creates_a_new_daily_weather_forecast
+    assert_difference "DailyWeatherForecast.count", 8 do
       post weather_reports_path, params: { weather_report: { city: "London" } }
     end
+  end
 
-    def test_it_creates_a_new_daily_weather_forecast
-      assert_difference "DailyWeatherForecast.count", 8 do
-        post weather_reports_path, params: { weather_report: { city: "London" } }
-      end
+  def test_it_should_not_create_new_daily_weather_forecast_if_city_is_not_found
+    stub_get_request("#{geolocation_path}?q=fakecity", response: {
+      status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_fake.json"))
+    })
+
+    assert_no_difference "DailyWeatherForecast.count" do
+      post weather_reports_path, params: { weather_report: { city: "fakecity" } }
     end
 
-    def test_it_should_not_create_new_weather_forecast_if_city_is_not_found
-      stub_get_request("#{geolocation_path}?q=fakecity", response: {
-        status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_fake.json"))
-      })
-
-      assert_no_difference "WeatherForecast.count" do
-        post weather_reports_path, params: { weather_report: { city: "fakecity" } }
-      end
-
-      assert_response :unprocessable_entity
-    end
-
-    def test_it_should_not_create_new_daily_weather_forecast_if_city_is_not_found
-      stub_get_request("#{geolocation_path}?q=fakecity", response: {
-        status: 200, body: File.read(Rails.root.join("test", "fixtures", "files", "geolocation_fake.json"))
-      })
-
-      assert_no_difference "DailyWeatherForecast.count" do
-        post weather_reports_path, params: { weather_report: { city: "fakecity" } }
-      end
-
-      assert_response :unprocessable_entity
-    end
-
-    assert_redirected_to weather_reports_path
+    assert_response :unprocessable_entity
   end
 end

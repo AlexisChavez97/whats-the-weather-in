@@ -5,7 +5,7 @@ require "test_helper"
 class DailyWeatherForecastTest < ActiveSupport::TestCase
   def setup
     @subject = DailyWeatherForecast.new
-    @subject.weather_forecast = weather_forecasts(:valid)
+    @subject.weather_report = weather_reports(:valid)
   end
 
   test "should save daily weather forecast" do

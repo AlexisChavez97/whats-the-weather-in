@@ -12,6 +12,10 @@ class FetchWeatherData
 
   private
     def fetch_weather_data
-      context.client.get(resource: "one_call", lat: context.geolocation.lat, lon: context.geolocation.lon)
+      context.client.get(resource: "one_call", lat: geolocation.lat, lon: geolocation.lon)
+    end
+
+    def geolocation
+      context.geolocation || context.weather_report.geolocation
     end
 end

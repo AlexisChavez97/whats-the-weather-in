@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DailyWeatherForecast < ApplicationRecord
-  belongs_to :weather_forecast
+  belongs_to :weather_report
 
   validates_presence_of :date, :high, :low, :icon, :summary
 

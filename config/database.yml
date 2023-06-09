@@ -20,8 +20,6 @@ default: &default
   host: <%= ENV["DB_HOST"] || 'postgres' %>
   username: <%= ENV["DB_USERNAME"] || 'postgres' %>
   password: <%= ENV["DB_PASSWORD"] || 'postgres' %>
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -60,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV.fetch('PG_DATABASE', 'postgres') %> 
+  database: <%= ENV.fetch('PG_DATABASE', 'whats_the_weather_test') %> 
   host:     <%= ENV.fetch('PG_HOST',  'localhost') %>
   username: <%= ENV.fetch('PG_USER', nil) %>
   password: <%= ENV.fetch('PG_PASSWORD', nil) %>

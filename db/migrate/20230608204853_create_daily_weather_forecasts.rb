@@ -8,7 +8,7 @@ class CreateDailyWeatherForecasts < ActiveRecord::Migration[7.0]
       t.string :high
       t.string :low
       t.string :icon
-      t.belongs_to :weather_forecast, index: true, foreign_key: true
+      t.belongs_to :weather_report, index: true, foreign_key: true
 
       t.timestamps
     end

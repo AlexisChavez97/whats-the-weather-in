@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   root "weather_reports#index"
 
-  resources :weather_reports, only: %i[index new show create]
+  resources :weather_reports, only: %i[index new show create update]
 end
