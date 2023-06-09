@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-class CreateWeatherForecast
+class UpdateWeatherForecast
   include Interactor
 
   def call
-    save_weather_forecast
+    destroy_old_forecast
+    update_weather_forecast
   end
 
   private
-    def save_weather_forecast
-      context.weather_report.forecast.build(daily_weather_forecasts)
-      context.fail!(message: context.weather_report.errors.full_messages) unless context.weather_report.save
+    def update_weather_forecast
+      forecast.build(daily_weather_forecasts)
+      context.fail!(message: forecast.errors.full_messages) unless context.weather_report.save
     end
 
     def daily_weather_forecasts
@@ -27,5 +28,13 @@ class CreateWeatherForecast
         icon: daily_weather.weather.first.icon,
         summary: daily_weather.summary
       }
+    end
+
+    def destroy_old_forecast
+      forecast.destroy_all
+    end
+
+    def forecast
+      context.weather_report.forecast
     end
 end

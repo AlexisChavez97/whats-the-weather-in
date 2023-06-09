@@ -41,4 +41,11 @@ class WeatherReportsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to weather_reports_path
   end
+
+  def test_it_should_update_weather_report
+    post weather_reports_path, params: { weather_report: { city: "London" } }
+    weather_report = WeatherReport.last
+    put weather_report_path(weather_report)
+    assert_redirected_to weather_report_path(weather_report)
+  end
 end

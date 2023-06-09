@@ -15,6 +15,24 @@ class WeatherReportsController < ApplicationController
     @weather_report = WeatherReport.find(params[:id])
   end
 
+  def update
+    result = ::UpdateWeatherReport.call(
+      client: OpenWeather::Client.new,
+      weather_report: WeatherReport.find(params[:id])
+    )
+
+    if result.success?
+      @weather_report = result.weather_report
+
+      respond_to do |format|
+        format.html { redirect_to weather_report_path(@weather_report) }
+        format.turbo_stream
+      end
+    else
+      render turbo_stream: turbo_stream.update("errors", partial: "shared/error_messages", locals: { errors: result.message })
+    end
+  end
+
   def create
     result = ::CreateWeatherReport.call(
       client: OpenWeather::Client.new,
