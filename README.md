@@ -16,6 +16,10 @@
 - `$ gem install rails`
 - `$ bundle install`
 
+### ENV
+
+You'll need to add an API key for the OpenWeather API as an environment variable
+
 
 ### DB
 - Create the db `$ bin/rails db:create`
